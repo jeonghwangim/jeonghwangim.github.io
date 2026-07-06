@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jeonghwan Gim</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: #FFFFFF;
+  color: #000000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* LEFT PANEL — fixed sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  padding: 56px 32px 40px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #f0f0f0;
+}
+.sidebar h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  margin: 0;
+}
+.sidebar .super {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #666666;
+  margin-top: 6px;
+  font-weight: 400;
+}
+.sidebar nav {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sidebar nav a {
+  font-size: 12px;
+  color: #000000;
+  text-decoration: none;
+  padding: 2px 0;
+}
+.sidebar nav a:hover { color: #666666; }
+.sidebar .contact {
+  margin-top: auto;
+  font-size: 11px;
+  color: #666666;
+  line-height: 1.6;
+}
+.sidebar .contact a {
+  color: #000000;
+  text-decoration: none;
+  border-bottom: 1px solid #cccccc;
+}
+.sidebar .contact a:hover { border-bottom-color: #000000; }
+.sidebar .contact .row { margin-top: 6px; }
+
+/* RIGHT PANEL — scrollable content */
+.content {
+  margin-left: 300px;
+  width: calc(100% - 300px);
+  padding: 72px 64px 120px;
+  max-width: 1000px;
+}
+
+.section-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #666666;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.bio { margin-bottom: 88px; max-width: 640px; }
+.bio p { margin-bottom: 14px; }
+.bio p:last-child { margin-bottom: 0; }
+
+.meta {
+  margin-bottom: 96px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px 28px;
+  max-width: 640px;
+  font-size: 13px;
+}
+.meta dt {
+  color: #666666;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-top: 2px;
+}
+.meta dd { color: #000000; }
+.meta a { color: #000000; text-decoration: none; border-bottom: 1px solid #cccccc; }
+.meta a:hover { border-bottom-color: #000000; }
+
+.work {
+  margin-bottom: 112px;
+  max-width: 820px;
+  scroll-margin-top: 24px;
+}
+.work:last-of-type { margin-bottom: 112px; }
+.work-header {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.work-title { font-size: 16px; font-weight: 700; font-style: italic; }
+.work-year { font-size: 12px; color: #666666; }
+.work-images { margin-bottom: 28px; }
+.work-meta {
+  font-size: 12px;
+  color: #666666;
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 640px;
+}
+.work-meta .label {
+  display: inline-block;
+  width: 92px;
+  color: #999999;
+}
+.work-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 640px;
+}
+.work-desc p { margin-bottom: 12px; }
+.work-desc p:last-child { margin-bottom: 0; }
+.doc-link {
+  font-size: 12px;
+  color: #000000;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 4px;
+}
+.doc-link:hover { color: #666666; }
+
+.section-break { margin: 128px 0 96px; border: none; }
+
+.cv { max-width: 720px; margin-bottom: 96px; scroll-margin-top: 24px; }
+.cv-block {
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 8px 28px;
+  font-size: 13px;
+}
+.cv-block:last-child { margin-bottom: 0; }
+.cv-block h3 {
+  grid-column: 1 / -1;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 400;
+  color: #666666;
+  margin-bottom: 10px;
+}
+.cv-year { color: #666666; font-size: 12px; padding-top: 2px; }
+.cv-item { color: #000000; }
+.cv-item .sub { color: #666666; font-size: 12px; display: block; margin-top: 2px; }
+.cv-item a { color: #000000; text-decoration: none; border-bottom: 1px solid #cccccc; }
+.cv-item a:hover { border-bottom-color: #000000; }
+
+.available { max-width: 720px; scroll-margin-top: 24px; }
+.available-work { margin-bottom: 32px; font-size: 12px; line-height: 1.7; }
+.available-work:last-child { margin-bottom: 0; }
+.available-work .name { font-weight: 700; font-style: italic; font-size: 13px; display: inline; }
+.available-work .year { color: #666666; margin-left: 6px; }
+.available-work .needs { color: #666666; margin-top: 4px; display: block; }
+
+.footer {
+  margin-top: 160px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #666666;
+}
+
+
+.work-images img[data-imgur-index] {
+  background: #f7f7f7;
+  min-height: 120px;
+}
+.work-images img[data-imgur-status="error"] {
+  outline: 1px solid #eeeeee;
+}
+
+/* MOBILE — collapse sidebar */
+@media (max-width: 900px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 40px 24px 24px;
+    border-right: none;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .sidebar nav { margin-top: 24px; flex-direction: row; flex-wrap: wrap; gap: 16px; }
+  .sidebar .contact { margin-top: 24px; }
+  .content { margin-left: 0; width: 100%; padding: 48px 24px 96px; }
+  .meta, .cv-block { grid-template-columns: 1fr; gap: 4px; }
+  .cv-year { padding-top: 0; }
+  .meta dt { padding-top: 0; margin-top: 12px; }
+  .meta dt:first-child { margin-top: 0; }
+  .work-meta .label { display: block; width: auto; margin-bottom: 2px; }
+}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+<h1>Jeonghwan Gim</h1>
+<div class="super">Portfolio</div>
+<nav>
+<a href="#about">About</a>
+<a href="#works">Selected Works</a>
+<a href="#cv">CV</a>
+<a href="#contact">Contact</a>
+</nav>
+<div class="contact" id="contact">
+<div class="row"><a href="mailto:gimmjeonghwan@gmail.com">gimmjeonghwan@gmail.com</a></div>
+<div class="row">Vienna &amp; Seoul</div>
+</div>
+</aside>
+<main class="content">
+<section class="bio" id="about">
+<div class="section-label">About</div>
+<p>Jeonghwan Gim (b. 1996, Seoul) is an artist and filmmaker based between Vienna and Seoul. He is currently studying at the Academy of Fine Arts Vienna, Art &amp; Time | Film (2025– ), under Prof. Emily Wardill. His practice moves across moving image, performative installation, and sculptural arrangement.</p><p>His work examines how bodies and images are produced through technical and domestic arrangements: screens, furniture, sound, interfaces, systems of measurement, and the habits formed around them. Rather than treating the image as a representation of a body, Gim approaches it as a condition that reorganizes posture, attention, behavior, and belief.</p><p>Familiar materials — folding screens, furniture, mirrors, food, white-noise machines, projections, and infrastructural fragments — appear not as props but as active conditions. They shape atmosphere, choreograph movement, and expose the home as a studio, shrine, stage, surveillance device, and malfunctioning interface at once.</p><p>Across these works, dependency appears less as a stable relation of support than as a field of pressure: bodies, objects, technical systems, and non-human actors sustain one another while also producing coercion, habit, and quiet constraint.</p></section>
+<section class="meta">
+<dt>Application</dt><dd>Curators’ Agenda: Vienna 2026 — IN(TER)DEPENDENCE</dd>
+<dt>Institution</dt><dd>Academy of Fine Arts Vienna — Art &amp; Time | Film</dd>
+<dt>Advisor</dt><dd>Prof. Emily Wardill</dd>
+<dt>Location</dt><dd>Vienna and Seoul</dd>
+<dt>Email</dt><dd><a href="mailto:gimmjeonghwan@gmail.com">gimmjeonghwan@gmail.com</a></dd>
+</section>
+<div class="section-label" id="works">Selected Works</div>
+<article class="work" id="near-the-well">
+<div class="work-header">
+<span class="work-title">near the well</span>
+<span class="work-year">2026</span>
+</div>
+<div class="work-images">
+<img alt="near the well — installation view" data-imgur-index="13" data-original-src="images/near-the-well-0-16.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="near the well — folding screen with projection" data-imgur-index="14" data-original-src="images/near-the-well-3-17.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="near the well — projection detail" data-imgur-index="15" data-original-src="images/near-the-well-4-18.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="near the well — video still" data-imgur-index="16" data-original-src="images/near-the-well-10-19.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+</div>
+<div class="work-meta">
+<div><span class="label">Medium</span>Video installation</div>
+<div><span class="label">Components</span>Paravent (folding screen), projection, acrylic mirror, sound, white-noise machine</div>
+<div><span class="label">Duration</span>7 min, HD</div>
+<div><span class="label">Dimensions</span>Folding screen approx. 3 m wide, 10 cm deep</div>
+<div><span class="label">Context</span>Vienna and Seoul</div>
+</div>
+<div class="work-desc">
+<p>A seven-minute video installation projected onto a folding screen, doubled by an acrylic mirror and carried by the continuous presence of a white-noise machine. The work traces how a body becomes legible through images that name, simplify, condemn, and circulate it.</p><p>Rather than presenting perception as immediate, <em>near the well</em> stages it as a technical construction. Projection, reflection, furniture, and ambient sound form a perceptual apparatus in which the body appears only after being filtered through media, atmosphere, and display.</p></div>
+<a class="doc-link" href="https://youtu.be/BQz05GNOrxk" rel="noopener" target="_blank">➔ Documentation</a>
+</article>
+<article class="work" id="freekick">
+<div class="work-header">
+<span class="work-title">freekick, non-freekick</span>
+<span class="work-year">2025</span>
+</div>
+<div class="work-images">
+<img alt="freekick, non-freekick — room-scale installation" data-imgur-index="8" data-original-src="images/freekick-nonfreekick-1-10.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="freekick, non-freekick — installation view" data-imgur-index="9" data-original-src="images/freekick-nonfreekick-1-11.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="freekick, non-freekick — performance" data-imgur-index="10" data-original-src="images/freekick-nonfreekick-2-12.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+
+</div>
+<div class="work-meta">
+<div><span class="label">Medium</span>Performative installation</div>
+<div><span class="label">Components</span>Sculptural structures, moving image, interface graphics, sound</div>
+<div><span class="label">Dimensions</span>Room-scale, approx. 16 m²</div>
+<div><span class="label">Context</span>1AO SPACE, Seoul</div>
+<div><span class="label">Performance</span>Gaeun Lee</div>
+<div><span class="label">Curation</span>Jinseo Park</div>
+</div>
+<div class="work-desc">
+<p>Taking the EA FIFA video game series as a point of departure, <em>freekick, non-freekick</em> examines how football culture turns the body into a readable and tradable unit. Kick accuracy, sprint speed, player ratings, and interface graphics convert bodily presence into performance data.</p><p>The installation approaches this logic as an economy of comparison, competition, and metric control. Bodies and technical systems do not simply reflect one another; they actively produce one another through scores, displays, gestures, and repeated forms of spectatorship.</p></div>
+<a class="doc-link" href="https://www.instagram.com/p/DLWlctXuNLY/" rel="noopener" target="_blank">➔ Documentation</a>
+</article>
+<article class="work" id="ohayo">
+<div class="work-header">
+<span class="work-title">ohayo</span>
+<span class="work-year">2023</span>
+</div><div class="work-images"><img alt="ohayo — video still" data-imgur-index="17" data-original-src="images/ohayo-0.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/></div>
+<div class="work-meta">
+<div><span class="label">Medium</span>Single-channel video</div>
+<div><span class="label">Properties</span>Color, sound</div>
+<div><span class="label">Duration</span>8′44″</div>
+<div><span class="label">Context</span>Seoul / Mainz</div>
+</div>
+<div class="work-desc">
+<p>A Korean family’s online worship is interrupted by an unknown error. From that interruption, the film drifts through blue skies, kebabs, and the hidden logic of a cactus. Positioned by the window, the plant observes the household and opens a passage into another dimension.</p><p>Domestic belief, interface failure, and more-than-human observation fold into one another. The home becomes shrine, screen, and malfunctioning system, while the plant is treated not as a decorative object but as a witness that changes how the scene can be perceived.</p></div>
+<a class="doc-link" href="https://youtu.be/vQuGNheSTm4" rel="noopener" target="_blank">➔ Documentation</a>
+</article>
+<article class="work" id="aftercrop">
+<div class="work-header">
+<span class="work-title">aftercrop</span>
+<span class="work-year">2026</span>
+</div>
+<div class="work-images">
+<img alt="aftercrop — installation overview" data-imgur-index="0" data-original-src="images/aftercrop-0-2.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="aftercrop — close-up of drawer with rice" data-imgur-index="1" data-original-src="images/aftercrop-1-3.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="aftercrop — lamp with cracked loaf" data-imgur-index="2" data-original-src="images/aftercrop-3-4.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="aftercrop — low sculptural detail" data-imgur-index="3" data-original-src="images/aftercrop-4-5.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+</div>
+<div class="work-meta">
+<div><span class="label">Medium</span>Performative installation</div>
+<div><span class="label">Components</span>IKEA furniture, rice, wooden sculpture, floor lamp</div>
+<div><span class="label">Dimensions</span>800 × 400 × 500 mm</div>
+<div><span class="label">Context</span>Mainz, studio work</div>
+</div>
+<div class="work-desc">
+<p>A compact sculptural arrangement of imported furniture, rice, worked wood, and domestic lighting. Drawers open onto grain; a lamp holds a cracked form; storage, offering, and collapse occupy the same provisional structure.</p><p><em>aftercrop</em> reads the domestic as an imported system of use. Food, form, and infrastructure are received, held, and quietly deformed by a body that inhabits them without fully inheriting them. Interdependence appears here through ordinary objects that sustain survival while remaining fragile, unstable, and materially unresolved.</p></div>
+</article>
+<article class="work" id="happymeal">
+<div class="work-header">
+<span class="work-title">happymeal</span>
+<span class="work-year">2024</span>
+</div>
+<div class="work-images">
+<img alt="happymeal — projection on industrial mesh" data-imgur-index="11" data-original-src="images/happymeal-0-14.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="happymeal — underground parking installation" data-imgur-index="12" data-original-src="images/happymeal-1-15.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+</div>
+<div class="work-meta">
+<div><span class="label">Medium</span>Machinima installation</div>
+<div><span class="label">Components</span>Industrial mesh net, projection, sound</div>
+<div><span class="label">Dimensions</span>Variable, site-responsive</div>
+<div><span class="label">Context</span>Underground parking garage</div>
+</div>
+<div class="work-desc">
+<p>A machinima projection cast onto industrial safety mesh in a subterranean parking space. Chickens, pigs, and cattle move through rendered enclosures — barns, transport cages, feeding lines — while the mesh functions simultaneously as fence, filter, and screen.</p><p>Livestock appears not only as animal life but as logistical body: fed, tracked, weighed, and moved through infrastructures that make life inseparable from management. Concrete columns, artificial lighting, and ventilation extend the barn into the underside of the city. Interdependence appears as a supply chain in which care, capture, and consumption share one continuous surface.</p></div>
+</article>
+<article class="work" id="fans-fans">
+<div class="work-header">
+<span class="work-title">Fans, Fans.</span>
+<span class="work-year">2026</span>
+</div>
+<div class="work-images">
+<img alt="Fans, fans — ceremonial hall floor installation" data-imgur-index="4" data-original-src="images/fansfans-1-6.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="Fans, fans — mirror-polished cylinders" data-imgur-index="5" data-original-src="images/fansfans-2-7.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="Fans, fans — porcelain and cylinder detail" data-imgur-index="6" data-original-src="images/fansfans-3-8.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+<img alt="Fans, fans — reflective sculptural basin" data-imgur-index="7" data-original-src="images/fansfans-4-9.jpg" decoding="async" loading="lazy" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'&gt;&lt;rect width='100%' height='100%' fill='%23f7f7f7'/&gt;&lt;/svg&gt;" style="width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;"/>
+</div>
+<div class="work-meta">
+<div><span class="label">Medium</span>Performative installation</div>
+<div><span class="label">Components</span>Mirror-polished cylinders, white-noise machine, porcelain, smoke detector, wooden structures</div>
+<div><span class="label">Dimensions</span>Variable, site-responsive</div>
+<div><span class="label">Context</span>Aula Hall, Academy of Fine Arts Vienna</div>
+<div><span class="label">Curation</span>Yein Lee</div>
+</div>
+<div class="work-desc">
+<p>Staged in the historic Aula of the Academy of Fine Arts Vienna, <em>Fans, Fans.</em> disperses mirror-polished cylinders, porcelain, a white-noise machine, a smoke detector, and wooden structures across a monumental floor. Reflection turns the institution back onto itself, while the machines produce a controlled atmosphere of technical calm.</p><p>Domestic fragments meet ceremonial architecture; comfort and surveillance operate on the same surface. The installation reads interdependence as infrastructural rather than harmonious: an ambience assembled from devices, objects, and institutional space, in which human presence is held, watched, and quietly managed.</p><p>The work can be adapted to the DAS WEISSE HAUS souterrain as a reduced constellation.</p></div>
+<a class="doc-link" href="https://youtu.be/Kd5S-OpiDBo" rel="noopener" target="_blank">➔ Documentation</a>
+</article>
+<hr class="section-break"/>
+<section class="cv" id="cv"><div class="section-label">Curriculum Vitae</div><div class="cv-block"><h3>Biography</h3><div class="cv-year">1996</div><div class="cv-item">Born in Seoul, South Korea</div><div class="cv-year">Present</div><div class="cv-item">Lives and works in Vienna and Seoul</div></div><div class="cv-block"><h3>Education</h3><div class="cv-year">2025–Present</div><div class="cv-item">Academy of Fine Arts Vienna<span class="sub">Diploma Programme in Fine Arts (Mae.art), Art &amp; Time | Film · Prof. Emily Wardill</span></div><div class="cv-year">2020–2022</div><div class="cv-item">Johannes Gutenberg University Mainz<span class="sub">Studies in Fine Arts / Film Class · Prof. John Skoog</span></div></div><div class="cv-block"><h3>Selected Exhibitions and Projects</h3><div class="cv-year">2026</div><div class="cv-item"><em>Fans, Fans.</em>, Aula Hall, Academy of Fine Arts Vienna<span class="sub">Solo exhibition · Curation: Yein Lee</span></div><div class="cv-year">2026</div><div class="cv-item"><em>Equinox</em>, 17(Joy) Intermission: Joy as Resistance, Lombardi—Kargl, Vienna<span class="sub">Collaborative performance project with Wendelien van Oldenborgh and the Concept Class, Academy of Fine Arts Vienna</span></div><div class="cv-year">2026</div><div class="cv-item"><em>near the well</em>, video installation<span class="sub">Vienna and Seoul</span></div><div class="cv-year">2026</div><div class="cv-item"><em>aftercrop</em>, studio work<span class="sub">Mainz</span></div><div class="cv-year">2025</div><div class="cv-item"><em>freekick, non-freekick</em>, 1AO SPACE, Seoul<span class="sub">Solo exhibition · Performance: Gaeun Lee · Curation: Jinseo Park</span></div><div class="cv-year">2025</div><div class="cv-item">Project Atopos<span class="sub">Moving-image direction · Selected funding project, Seoul Foundation for Arts and Culture</span></div><div class="cv-year">2024</div><div class="cv-item"><em>happymeal</em>, machinima installation<span class="sub">Underground parking garage</span></div><div class="cv-year">2023</div><div class="cv-item"><em>ohayo</em>, single-channel video<span class="sub">Seoul / Mainz</span></div></div><div class="cv-block"><h3>Awards and Grants</h3><div class="cv-year">2026</div><div class="cv-item">2nd Year Scholarship, Academy of Fine Arts Vienna</div><div class="cv-year">2023</div><div class="cv-item">Special Award, Seoul Webfest<span class="sub">Supported by Seoul Metropolitan Government &amp; KOCCA, Seoul</span></div><div class="cv-year">2022–2023</div><div class="cv-item">Selected and funded by Film + Medien Nachwuchsförderung Rheinland-Pfalz</div><div class="cv-year">2022</div><div class="cv-item">Volksbank Rundgang Prize of Mainzer Volksbank</div></div><div class="cv-block"><h3>Languages</h3><div class="cv-year">German</div><div class="cv-item">B2, telc certified</div><div class="cv-year">English</div><div class="cv-item">Fluent</div><div class="cv-year">Korean</div><div class="cv-item">Native</div></div><div class="cv-block"><h3>Contact</h3><div class="cv-year">Email</div><div class="cv-item"><a href="mailto:gimmjeonghwan@gmail.com">gimmjeonghwan@gmail.com</a></div><div class="cv-year">Location</div><div class="cv-item">Vienna and Seoul</div></div></section>
+<hr class="section-break"/>
+<section class="available">
+<div class="section-label">Available for Exhibition</div>
+<div class="available-work">
+<span class="name">near the well</span><span class="year">2026</span>
+<div>Video installation: paravent, projection, acrylic mirror, sound. Duration 7 min, HD. Folding screen approx. 3 m wide, 10 cm deep.</div>
+<span class="needs">Installation needs: darkened space, projector, sound system, white-noise machine.</span>
+</div>
+<div class="available-work">
+<span class="name">freekick, non-freekick</span><span class="year">2025</span>
+<div>Performative installation: sculptural structures, moving image, interface graphics, sound. Room-scale, approx. 16 m².</div>
+<span class="needs">Installation needs: wall-mounted sculptural elements, projection, sound, mechanical element.</span>
+</div>
+<div class="available-work">
+<span class="name">ohayo</span><span class="year">2023</span>
+<div>Single-channel video, color, sound. Duration 8′44″.</div>
+<span class="needs">Installation needs: monitor or projection, headphones or contained audio.</span>
+</div>
+<div class="available-work">
+<span class="name">aftercrop</span><span class="year">2026</span>
+<div>Performative installation: IKEA furniture, rice, wooden sculpture, floor lamp. 800 × 400 × 500 mm.</div>
+<span class="needs">Installation needs: floor placement, one floor lamp (power), portable and reconfigurable.</span>
+</div>
+<div class="available-work">
+<span class="name">happymeal</span><span class="year">2024</span>
+<div>Machinima installation: industrial mesh net, projection, sound. Dimensions variable, site-responsive.</div>
+<span class="needs">Installation needs: mesh net or comparable projection substrate, projector, sound system, low-light or semi-enclosed space.</span>
+</div>
+<div class="available-work">
+<span class="name">Fans, Fans.</span><span class="year">2026</span>
+<div>Performative installation: mirror-polished cylinders, white-noise machine, porcelain, smoke detector, wooden structures. Dimensions variable, site-responsive.</div>
+<span class="needs">Installation needs: open floor area, power for white-noise machine. Adaptable and scalable to the DAS WEISSE HAUS souterrain.</span>
+</div>
+</section>
+<div class="footer">Jeonghwan Gim · C’A Vienna 2026</div>
+</main>
+<script>
+(function () {
+  const albumId = "VnfQEJn";
+  const clientId = "546c25a59c58ad7";
+  const targets = Array.from(document.querySelectorAll("img[data-imgur-index]"));
+  if (!targets.length) return;
+
+  const endpoints = [
+    `https://api.imgur.com/post/v1/albums/${albumId}?client_id=${clientId}&include=media%2Ctags%2Caccount`,
+    `https://api.imgur.com/post/v1/posts/${albumId}?client_id=${clientId}&include=media%2Ctags%2Caccount`
+  ];
+
+  function normalizeUrl(item) {
+    if (!item) return "";
+    let url = item.url || item.link || item.href || item?.metadata?.url || item?.metadata?.link || "";
+    if (!url && item.id) {
+      const ext = item.ext || item.extension || ".jpg";
+      url = `https://i.imgur.com/${item.id}${ext.startsWith(".") ? ext : "." + ext}`;
+    }
+    if (url.startsWith("//")) url = "https:" + url;
+    url = url.replace(/^http:\/\//, "https://").split("?")[0];
+    if (url.endsWith(".gifv")) url = url.replace(/\.gifv$/, ".mp4");
+    return url;
+  }
+
+  function extractMedia(data) {
+    const candidates = [
+      data?.media,
+      data?.data?.media,
+      data?.post?.media,
+      data?.data?.post?.media,
+      data?.album?.media,
+      data?.data?.album?.media
+    ];
+    for (const list of candidates) {
+      if (Array.isArray(list) && list.length) return list.map(normalizeUrl).filter(Boolean);
+    }
+    return [];
+  }
+
+  async function fetchAlbumMedia() {
+    let lastError = null;
+    for (const endpoint of endpoints) {
+      try {
+        const response = await fetch(endpoint, { mode: "cors", cache: "force-cache" });
+        if (!response.ok) throw new Error(`Imgur API ${response.status}`);
+        const data = await response.json();
+        const urls = extractMedia(data);
+        if (urls.length) return urls;
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError || new Error("No Imgur media returned");
+  }
+
+  fetchAlbumMedia()
+    .then(function (urls) {
+      targets.forEach(function (img) {
+        const index = Number(img.dataset.imgurIndex);
+        const url = urls[index];
+        if (!url) {
+          img.dataset.imgurStatus = "error";
+          img.alt = img.alt + " — image URL missing";
+          return;
+        }
+        if (url.endsWith(".mp4")) {
+          const video = document.createElement("video");
+          video.src = url;
+          video.controls = true;
+          video.muted = true;
+          video.playsInline = true;
+          video.loop = true;
+          video.style.cssText = img.getAttribute("style") || "width:100%; height:auto; max-width:800px; margin-bottom:30px; display:block;";
+          video.setAttribute("aria-label", img.alt || "Imgur video");
+          img.replaceWith(video);
+          return;
+        }
+        img.src = url;
+        img.dataset.imgurStatus = "loaded";
+      });
+    })
+    .catch(function (error) {
+      console.error("Could not load Imgur album images:", error);
+      targets.forEach(function (img) {
+        img.dataset.imgurStatus = "error";
+        img.alt = img.alt + " — Imgur load failed";
+      });
+    });
+})();
+</script>
+</body>
+</html>
